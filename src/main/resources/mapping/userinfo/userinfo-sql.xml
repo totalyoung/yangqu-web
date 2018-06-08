@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yangqu.mvc.userinfo.dao.UserinfoDao">
+
+	<sql id="select_sql">
+	    select `userId`,`accountId`,`nickName`,`face`,`exp`,`level`,`vip`,`diamond`,`gold`,`honor`,`skillPoint`,`ST`,`BP`,`commonFragment`,`leagueId`,`leaguePosition` from baggio_zone_data.t_userinfo
+	</sql>
+	
+	<!-- 根据主键ID查询单条记录 -->
+	<select id="get" resultType="com.yangqu.mvc.userinfo.entity.Userinfo">
+	    <include refid="select_sql"/>
+		where  `userId` =#{userid}
+	</select>
+	
+	<!-- 根据条件查询多条记录 -->
+	<select id="findList" resultType="com.yangqu.mvc.userinfo.entity.Userinfo">
+	    <include refid="select_sql"/>
+		<where>
+			<if test="userId != null">and `userId`=#{userId}</if>
+			<if test="accountId != null">and `accountId`=#{accountId}</if>
+			<if test="nickName != null">and `nickName`=#{nickName}</if>
+			<if test="face != null">and `face`=#{face}</if>
+			<if test="exp != null">and `exp`=#{exp}</if>
+			<if test="level != null">and `level`=#{level}</if>
+			<if test="vip != null">and `vip`=#{vip}</if>
+			<if test="diamond != null">and `diamond`=#{diamond}</if>
+			<if test="gold != null">and `gold`=#{gold}</if>
+			<if test="honor != null">and `honor`=#{honor}</if>
+			<if test="skillPoint != null">and `skillPoint`=#{skillPoint}</if>
+			<if test="ST != null">and `ST`=#{ST}</if>
+			<if test="BP != null">and `BP`=#{BP}</if>
+			<if test="commonFragment != null">and `commonFragment`=#{commonFragment}</if>
+			<if test="leagueId != null">and `leagueId`=#{leagueId}</if>
+			<if test="leaguePosition != null">and `leaguePosition`=#{leaguePosition}</if>
+		</where>
+
+	</select>
+
+	<!-- 获取列表信息 -->
+	<select id="selectList" resultType="java.util.Map" parameterType="java.util.Map">
+		SELECT
+		a.userId,
+		a.accountId,
+		a.nickName,
+		a.face,
+		a.exp,
+		a.level,
+		a.vip,
+		a.diamond,
+		a.gold,
+		a.honor,
+		a.skillPoint,
+		a.ST,
+		a.BP,
+		a.commonFragment,
+		a.leagueId,
+		a.leaguePosition
+		FROM `t_userinfo` AS a
+	</select>
+	
+	
+</mapper>
